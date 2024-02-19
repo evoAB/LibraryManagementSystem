@@ -30,7 +30,7 @@ public class AuthorService {
 
         message.setSubject("Hi "+newAuthor.getAuthorName()+" !");
 
-        message.setFrom("springacciojob@gmail.com");
+        message.setFrom("abc@gmail.com");
         message.setTo(newAuthor.getEmailId());
 
 
