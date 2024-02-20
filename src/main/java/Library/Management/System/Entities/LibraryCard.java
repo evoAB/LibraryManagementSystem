@@ -42,4 +42,7 @@ public class LibraryCard {
     @OneToMany(mappedBy = "libraryCard",cascade = CascadeType.ALL)
     public List<Transaction> transactionList = new ArrayList<>();
 
+    public LibraryCard(CardStatus cardStatus) {
+        this.cardStatus = cardStatus;
+    }
 }

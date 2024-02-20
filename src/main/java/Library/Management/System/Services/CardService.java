@@ -61,7 +61,7 @@ public class CardService {
 
         cardRepository.save(libraryCard);
 
-        return "Card with cardId"+cardId+"and student with studentId "+studentId+" are associated";
+        return "Card with cardId "+cardId+" and student with studentId "+studentId+" are associated";
     }
 
 }

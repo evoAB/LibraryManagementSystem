@@ -2,9 +2,13 @@ package Library.Management.System.Services;
 
 import Library.Management.System.Entities.Student;
 import Library.Management.System.Repository.StudentRepository;
+import Library.Management.System.RequestDtos.AddStudentRequest;
 import com.example.librarymanagementsystem.RequestDtos.ModifyPhnNoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
@@ -14,11 +18,15 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public String addStudent(Student student){
+    public String addStudent(AddStudentRequest addStudentRequest){
+
+        Student student = new Student(addStudentRequest.getName(),addStudentRequest.getBranch(), addStudentRequest.getCgpa(), addStudentRequest.getPhoneNo());
+
+//        System.out.println(student.getStudentId() + student.getName());
 
         Student savedStudent = studentRepository.save(student);
 
-        return "The student has been saved to DB with studentId"+savedStudent.getStudentId();
+        return "The student has been saved to DB with studentId "+savedStudent.getStudentId();
     }
 
     public Student findStudentById(Integer studentId)throws Exception {
@@ -45,5 +53,9 @@ public class StudentService {
 
         return "Phone No. has been modified";
     }
-
+    public String removeStudent(Integer studentId){
+        Student student = studentRepository.findById(studentId).get();
+        studentRepository.deleteById(studentId);
+        return student.getName()+" has been removed";
+    }
 }

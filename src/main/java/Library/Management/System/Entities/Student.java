@@ -39,6 +39,14 @@ public class Student {
         mappedBy contains the value of variable Name : foreign key variable name
         in the child table
      */
+
     @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
     private LibraryCard libraryCard;
+
+    public Student(String name, String branch, double cgpa, String phoneNo) {
+        this.name = name;
+        this.branch = branch;
+        this.cgpa = cgpa;
+        this.phoneNo = phoneNo;
+    }
 }

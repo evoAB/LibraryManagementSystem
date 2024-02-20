@@ -1,18 +1,13 @@
 package Library.Management.System.Controllers;
 
 import Library.Management.System.Entities.Student;
+import Library.Management.System.RequestDtos.AddStudentRequest;
 import Library.Management.System.Services.StudentService;
 import com.example.librarymanagementsystem.RequestDtos.ModifyPhnNoRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/student")
@@ -23,9 +18,9 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/addStudent")
-    public ResponseEntity<String> addStudent(@RequestBody Student student){
+    public ResponseEntity<String> addStudent(@RequestBody AddStudentRequest addStudentRequest){
 
-        String result = studentService.addStudent(student);
+        String result = studentService.addStudent(addStudentRequest);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
@@ -49,6 +44,14 @@ public class StudentController {
 
     }
 
-
+    @DeleteMapping("/removeStudent")
+    public ResponseEntity removeStudent(@RequestParam("studentId")Integer studentId){
+        try{
+            String result = studentService.removeStudent(studentId);
+            return new ResponseEntity(result,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }
